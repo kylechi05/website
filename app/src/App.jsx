@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import './App.css'
+import React, { useState } from 'react'
+import './index.css'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -8,7 +8,7 @@ function App() {
     <>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
+        <button className="bg-blue-100" onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
         <p>
