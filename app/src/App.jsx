@@ -12,11 +12,9 @@ function App() {
   return (
     <BrowserRouter>
       <Navbar />
-      <div>
-        <Home />
-        <About />
-        <Projects />
-      </div>
+      <Home />
+      <About />
+      <Projects />
     </BrowserRouter>
   )
 }
