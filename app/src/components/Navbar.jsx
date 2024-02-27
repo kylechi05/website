@@ -1,31 +1,20 @@
-import React from 'react'
-import { HashLink } from 'react-router-hash-link'
+import React, { useEffect } from 'react'
+import { Link, Outlet, useLocation } from 'react-router-dom'
+import './navbar.scss'
 
 function Navbar() {
+
     return (
-        <div className='fixed w-screen h-16 bg-white'>
-            <HashLink smooth to="/#home">Home</HashLink>
-            <HashLink smooth to="/#about">About</HashLink>
-            <HashLink smooth to="/#projects">Projects</HashLink>
-            <a
-                href="Resume - Kyle Chi.pdf"
-                target="_blank"
-            >
-                Resume
-            </a>
-            <a
-                href="https://github.com/kylechi05"
-                target="_blank"
-            >
-                GitHub
-            </a>
-            <a
-                href="https://www.linkedin.com/in/kyle-chi/"
-                target="_blank"
-            >
-                LinkedIn
-            </a>
-        </div>
+        <>
+            <nav className='fixed w-full bg-white'>
+                <ul className='flex justify-center items-center'>
+                    <li><Link to="/">Home</Link></li>
+                    <li><Link to="/about">About</Link></li>
+                    <li><Link to="/projects">Projects</Link></li>
+                </ul>
+            </nav>
+            <Outlet />
+        </>
     )
 }
 

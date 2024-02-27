@@ -1,0 +1,13 @@
+@use '../src/index.scss' as base;
+
+nav {
+    li {
+        @include base.mdBreakpoint {
+            padding: 0 5px;
+            margin: 0 16px;
+        }
+
+        padding: 0 3px;
+        margin: 0 8px;
+    }   
+}

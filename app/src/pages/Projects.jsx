@@ -1,10 +1,13 @@
 import React from 'react'
+import usePageTitle from '../hooks/usePageTitle'
 
 function Projects() {
+
+    usePageTitle('Projects')
+
     return (
         <>
             <div
-                id="projects"
                 className='bg-red-100 h-screen'
             >
                 Projects
