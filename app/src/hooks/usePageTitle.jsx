@@ -1,13 +1,11 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 function usePageTitle(title) {
-    useEffect(() => {
-        if (!title) {
-            window.document.title = "Kyle Chi"
-        } else {
-            window.document.title = `Kyle Chi · ${title}`
-        }
-    }, [title])
+    if (!title) {
+        window.document.title = "Kyle Chi"
+    } else {
+        window.document.title = `Kyle Chi · ${title}`
+    }
 }
 
 export default usePageTitle

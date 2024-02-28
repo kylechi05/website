@@ -2,12 +2,25 @@
 
 nav {
     li {
-        @include base.mdBreakpoint {
-            padding: 0 5px;
-            margin: 0 16px;
-        }
+        display: flex;
+        position: relative;
 
-        padding: 0 3px;
-        margin: 0 8px;
+    }
+    a {
+        @include base.mdBreakpoint {
+            padding: 6px 20px;
+            margin: 0 10px;
+        }
+        padding: 6px 16px;
+        margin: 0 5px;
+        z-index: 1;
     }   
+}
+
+.slider {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: green;
+    transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
 }
