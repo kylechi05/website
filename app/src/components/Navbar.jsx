@@ -2,22 +2,31 @@ import React, { useState, useRef, useEffect } from 'react'
 import { Link, Outlet, useLocation } from 'react-router-dom'
 import './navbar.scss'
 
+var linkValues = {}
+var transitionDuration = '0.3s'
+var transitionDelay = ['0.3s', '0s', '0s']
+
 function Navbar() {
 
     const [sliderWidth, setSliderWidth] = useState(null)
     const [sliderLeft, setSliderLeft] = useState(null)
-    const [linkValues, setLinkValues] = useState({})
-    const [sliderReady, setSliderReady] = useState(false)
+    const [sliderOpacity, setSliderOpacity] = useState(0)
 
     const homeRef = useRef()
     const aboutRef = useRef()
     const projectsRef = useRef()
 
-    let location = useLocation()
-
     const activeTab = sessionStorage.getItem('activeTab')
 
+    let location = useLocation()
+    let timeout
+
     useEffect(() => {
+        /*
+            cannot change this if/else statement despite it looking redundant 
+            this is because when reloading, location.pathname will change but the states will be delayed
+            causing slider to be stuck one click behind
+        */
         if (activeTab) {
             switch(activeTab) {
                 case 'about':
@@ -48,7 +57,7 @@ function Navbar() {
             }
         }
 
-        setLinkValues({
+        linkValues = {
             'home': {
                 'width': homeRef.current.offsetWidth,
                 'left': homeRef.current.getBoundingClientRect().left
@@ -61,10 +70,9 @@ function Navbar() {
                 'width': projectsRef.current.offsetWidth,
                 'left': projectsRef.current.getBoundingClientRect().left
             }
-        })
-        setSliderReady(true)
-        // need to set the slider at the correct position on resize
-    }, []) // needs to happen every time that the screen resizes
+        }
+        setSliderOpacity(1)
+    }, [])
 
     const handleClick = (currentTab) => {
         switch(currentTab) {
@@ -84,6 +92,35 @@ function Navbar() {
         sessionStorage.setItem('activeTab', currentTab)
     }
 
+    const handleResize = () => {
+        transitionDuration = '0s'
+        transitionDelay[0] = '0s'
+        setSliderOpacity(0)
+        clearTimeout(timeout)
+        timeout = setTimeout(() => {
+            linkValues = {
+                'home': {
+                    'width': homeRef.current.offsetWidth,
+                    'left': homeRef.current.getBoundingClientRect().left
+                },
+                'about': {
+                    'width': aboutRef.current.offsetWidth,
+                    'left': aboutRef.current.getBoundingClientRect().left
+                },
+                'projects': {
+                    'width': projectsRef.current.offsetWidth,
+                    'left': projectsRef.current.getBoundingClientRect().left
+                }
+            }
+            handleClick(sessionStorage.getItem('activeTab'))
+            transitionDuration = '0.3s'
+            transitionDelay[0] = '0.3s'
+            setSliderOpacity(1)
+        }, 500)
+    }
+
+    window.addEventListener('resize', handleResize)
+
     return (
         <>
             <div className='fixed w-full'>
@@ -93,9 +130,17 @@ function Navbar() {
                         <li onClick={() => handleClick('about')}><Link to="/about" ref={aboutRef}>About</Link></li>
                         <li onClick={() => handleClick('projects')}><Link to="/projects" ref={projectsRef}>Projects</Link></li>
                     </ul>
-                    {sliderReady && (
-                        <div className='slider rounded-full z-0' style={{left: sliderLeft, width: sliderWidth}}></div>
-                    )}
+                    <div
+                        className='slider rounded-full z-0'
+                        style={{
+                            opacity: sliderOpacity,
+                            left: sliderLeft,
+                            width: sliderWidth,
+                            transitionDuration: transitionDuration,
+                            transitionDelay: `${transitionDelay[0]}, ${transitionDelay[1]}, ${transitionDelay[2]}`
+                        }}
+                    >
+                    </div>
                 </nav>
             </div>
             <Outlet />
