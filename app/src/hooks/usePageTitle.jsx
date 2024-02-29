@@ -1,5 +1,3 @@
-import React from 'react'
-
 function usePageTitle(title) {
     if (!title) {
         window.document.title = "Kyle Chi"

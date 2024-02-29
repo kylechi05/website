@@ -19,8 +19,10 @@ nav {
 
 .slider {
     position: absolute;
-    height: 100%;
+    height: 70%;
     width: 100%;
     background: green;
-    transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
+    transition-property: width, left;
+    transition-duration: 0.25s;
+    transition-timing-function: ease-in-out;
 }
