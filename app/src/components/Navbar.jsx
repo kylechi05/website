@@ -3,8 +3,8 @@ import { Link, Outlet, useLocation } from 'react-router-dom'
 import './navbar.scss'
 
 var linkValues = {}
-var transitionDuration = '0.3s'
-var transitionDelay = ['0.3s', '0s', '0s']
+var transitionDuration = '0.2s'
+var transitionDelay = ['0.2s', '0s', '0s']
 
 function Navbar() {
 
@@ -113,8 +113,8 @@ function Navbar() {
                 }
             }
             handleClick(sessionStorage.getItem('activeTab'))
-            transitionDuration = '0.3s'
-            transitionDelay[0] = '0.3s'
+            transitionDuration = '0.2s'
+            transitionDelay[0] = '0.2s'
             setSliderOpacity(1)
         }, 500)
     }
@@ -125,13 +125,13 @@ function Navbar() {
         <>
             <div className='fixed w-full'>
                 <nav className='flex relative justify-center items-center mt-5'>
-                    <ul className='flex p-2.5 rounded-full bg-white'>
+                    <ul className='flex relative p-2.5 rounded-full bg-white/50'>
                         <li onClick={() => handleClick('home')}><Link to="/" ref={homeRef}>Home</Link></li>
                         <li onClick={() => handleClick('about')}><Link to="/about" ref={aboutRef}>About</Link></li>
                         <li onClick={() => handleClick('projects')}><Link to="/projects" ref={projectsRef}>Projects</Link></li>
                     </ul>
                     <div
-                        className='slider rounded-full z-0'
+                        className='slider rounded-full'
                         style={{
                             opacity: sliderOpacity,
                             left: sliderLeft,
@@ -140,8 +140,8 @@ function Navbar() {
                             transitionDelay: `${transitionDelay[0]}, ${transitionDelay[1]}, ${transitionDelay[2]}`
                         }}
                     >
-                    </div>
-                </nav>
+                </div>
+                </nav>  
             </div>
             <Outlet />
         </>

@@ -8,7 +8,7 @@ function Home() {
     return (
         <>
             <div
-                className='bg-yellow-100 h-screen'
+                className='gradient h-screen'
             >
                 Home
                 <a
