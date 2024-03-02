@@ -71,7 +71,7 @@ function Navbar() {
                 'left': projectsRef.current.getBoundingClientRect().left
             }
         }
-        setSliderOpacity(0.6)
+        setSliderOpacity(0.75)
     }, [])
 
     const handleClick = (currentTab) => {
@@ -115,7 +115,7 @@ function Navbar() {
             handleClick(sessionStorage.getItem('activeTab'))
             transitionDuration = '0.2s'
             transitionDelay[0] = '0.2s'
-            setSliderOpacity(0.6)
+            setSliderOpacity(0.75)
         }, 500)
     }
 
@@ -124,7 +124,7 @@ function Navbar() {
     return (
         <>
             <div className='fixed w-full'>
-                <nav className='flex relative justify-center items-center mt-5'>
+                <nav className='flex relative justify-center items-center pt-5'>
                     <ul className='flex relative p-2.5 rounded-full '>
                         <li onClick={() => handleClick('home')}><Link to="/" ref={homeRef}>Home</Link></li>
                         <li onClick={() => handleClick('about')}><Link to="/about" ref={aboutRef}>About</Link></li>

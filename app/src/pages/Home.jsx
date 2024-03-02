@@ -5,13 +5,16 @@ function Home() {
 
     usePageTitle('Home')
     
+
+
     return (
         <>
-            <div
-                className='h-screen text-8xl'
+            { /* for all pages, set height to h-screen if the content doesn't take up more than the screen */ }
+            <div 
+                className='text-8xl h-screen'
             >
-                Hi. I'm Kyle
                 
+                Hi. I'm Kyle 
             </div>
         </>
     )

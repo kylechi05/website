@@ -19,29 +19,29 @@
 :root {
     --color-gradient: linear-gradient(
         45deg,
-        rgba(255, 208, 208, 0.65),
-        rgba(255, 235, 208, 0.65),
-        rgba(255, 235, 208, 0.65),
-        rgba(252, 255, 208, 0.65),
-        rgba(252, 255, 208, 0.65),
-        rgba(239, 255, 208, 0.65),
-        rgba(239, 255, 208, 0.65),
-        rgba(208, 255, 217, 0.65),
-        rgba(208, 255, 217, 0.65),
-        rgba(239, 255, 208, 0.65),
-        rgba(239, 255, 208, 0.65),
-        rgba(252, 255, 208, 0.65),
-        rgba(252, 255, 208, 0.65),
-        rgba(255, 235, 208, 0.65),
-        rgba(255, 235, 208, 0.65),
-        rgba(255, 208, 208, 0.65),
-        rgba(255, 235, 208, 0.65),
-        rgba(255, 235, 208, 0.65),
-        rgba(252, 255, 208, 0.65),
-        rgba(252, 255, 208, 0.65),
-        rgba(239, 255, 208, 0.65),
-        rgba(239, 255, 208, 0.65),
-        rgba(208, 255, 217, 0.65)
+        rgba(255, 208, 208, 0.9),
+        rgba(255, 235, 208, 0.9),
+        rgba(255, 235, 208, 0.9),
+        rgba(252, 255, 208, 0.9),
+        rgba(252, 255, 208, 0.9),
+        rgba(239, 255, 208, 0.9),
+        rgba(239, 255, 208, 0.9),
+        rgba(208, 255, 217, 0.9),
+        rgba(208, 255, 217, 0.9),
+        rgba(239, 255, 208, 0.9),
+        rgba(239, 255, 208, 0.9),
+        rgba(252, 255, 208, 0.9),
+        rgba(252, 255, 208, 0.9),
+        rgba(255, 235, 208, 0.9),
+        rgba(255, 235, 208, 0.9),
+        rgba(255, 208, 208, 0.9),
+        rgba(255, 235, 208, 0.9),
+        rgba(255, 235, 208, 0.9),
+        rgba(252, 255, 208, 0.9),
+        rgba(252, 255, 208, 0.9),
+        rgba(239, 255, 208, 0.9),
+        rgba(239, 255, 208, 0.9),
+        rgba(208, 255, 217, 0.9)
     ),
     linear-gradient(
         0deg,
@@ -118,7 +118,25 @@
 }
 
 .gradient {
+   background: linear-gradient(rgba(238, 230, 220, 0), rgba(238, 230, 220, 1) 70%);
+   position: relative;
+}
+
+.gradient > * {
+    z-index: 10;
+    position: relative;
+}
+
+.gradient::after {
+    content: "";
+    mix-blend-mode: overlay;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    height: 100%;
+    width: 100%;
+    background-size: 500% 500%;
     background-image: var(--color-gradient);
-    background-size: 600% 600%;
     animation: bg-animation 240s infinite linear;
 }
