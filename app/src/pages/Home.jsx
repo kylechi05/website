@@ -8,29 +8,11 @@ function Home() {
     return (
         <>
             <div
-                className='gradient h-screen'
+                className='h-screen text-8xl'
             >
-                Home
-                <a
-                    href="Resume - Kyle Chi.pdf"
-                    target="_blank"
-                >
-                    Resume
-                </a>
-                <a
-                    href="https://github.com/kylechi05"
-                    target="_blank"
-                >
-                    GitHub
-                </a>
-                <a
-                    href="https://www.linkedin.com/in/kyle-chi/"
-                    target="_blank"
-                >
-                    LinkedIn
-                </a>
+                Hi. I'm Kyle
+                
             </div>
-            
         </>
     )
 }

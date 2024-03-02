@@ -8,7 +8,7 @@ function Projects() {
     return (
         <>
             <div
-                className='bg-red-100 h-screen'
+                className='h-screen'
             >
                 Projects
             </div>

@@ -11,6 +11,7 @@ function App() {
   
   return (
     <BrowserRouter>
+    <div className='gradient'>
       <Routes>
         <Route path="/" element={<Navbar />}>
           <Route path="/" index element={<Home />} />
@@ -19,6 +20,7 @@ function App() {
         </Route>
         <Route path="*" element={<PageNotFound />} />
       </Routes>
+    </div>
     </BrowserRouter>
   )
 }

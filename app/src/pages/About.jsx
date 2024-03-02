@@ -8,9 +8,27 @@ function About() {
     return (
         <>
             <div
-                className='bg-green-100 h-screen'
+                className='h-screen'
             >
                 About
+                <a
+                    href="Resume - Kyle Chi.pdf"
+                    target="_blank"
+                >
+                    Resume
+                </a>
+                <a
+                    href="https://github.com/kylechi05"
+                    target="_blank"
+                >
+                    GitHub
+                </a>
+                <a
+                    href="https://www.linkedin.com/in/kyle-chi/"
+                    target="_blank"
+                >
+                    LinkedIn
+                </a>
             </div>
         </>
     )
