@@ -3,15 +3,19 @@ import { Link, Outlet, useLocation } from 'react-router-dom'
 import './navbar.scss'
 
 var linkValues = {}
-var transitionDuration = '0.2s'
-var transitionDelay = ['0.2s', '0s', '0s']
 
 function Navbar() {
 
-    const [sliderWidth, setSliderWidth] = useState(null)
+    const [sliderWidth, setSliderWidth] = useState(null) // refactor so most become one object "sliderAttributes"
     const [sliderLeft, setSliderLeft] = useState(null)
-    const [sliderOpacity, setSliderOpacity] = useState(0)
-    const [navBackground, setNavBackground] = useState('bg-white/0')
+    const [transitionDuration, setTransitionDuration] = useState('0.2s')
+    const [sliderOpacity, setSliderOpacity] = useState(0) 
+    const [sliderOpacityTransitionDelay] = useState('0.2s')
+
+    const [navBackground, setNavBackground] = useState({
+        color: 'rgba(255, 255, 255, 0)',
+        blur: 'blur(0px)'
+    })
 
     const homeRef = useRef()
     const aboutRef = useRef()
@@ -23,8 +27,8 @@ function Navbar() {
     let timeout
     
     const handleResize = () => {
-        transitionDuration = '0s'
-        transitionDelay[0] = '0s'
+        setTransitionDuration('0s')
+        setSliderOpacityTransitionDelay('0s')
         setSliderOpacity(0)
         clearTimeout(timeout)
         timeout = setTimeout(() => {
@@ -43,8 +47,8 @@ function Navbar() {
                 }
             }
             handleClick(sessionStorage.getItem('activeTab'))
-            transitionDuration = '0.2s'
-            transitionDelay[0] = '0.2s'
+            setTransitionDuration('0.2s')
+            setSliderOpacityTransitionDelay('0.2s')
             setSliderOpacity(0.5)
         }, 500)
     }
@@ -69,12 +73,15 @@ function Navbar() {
 
     const handleScroll = () => {
         if (window.scrollY > 30) {
-            setNavBackground('bg-white/50 backdrop-blur-md') // need to add transition time for this
-            // need to set blur
-            // need to set slider div color
-            // changes for below are also needed
+            setNavBackground({
+                color: 'rgba(255, 255, 255, 0.7)',
+                blur: 'blur(10px)'
+            })
         } else {
-            setNavBackground('bg-white/0')
+            setNavBackground({
+                color: 'rgba(255, 255, 255, 0)',
+                blur: 'blur(0px)'
+            })
         }
     }
 
@@ -149,7 +156,14 @@ function Navbar() {
                         <li onClick={() => handleClick('home')}><Link to="/" ref={homeRef}>Home</Link></li>
                         <li onClick={() => handleClick('about')}><Link to="/about" ref={aboutRef}>About</Link></li>
                         <li onClick={() => handleClick('projects')}><Link to="/projects" ref={projectsRef}>Projects</Link></li>
-                        <div className={`absolute top-0 left-0 w-full h-full rounded-full ${navBackground}`}></div>
+                        <div
+                            className='navigation-background rounded-full'
+                            style={{
+                                backgroundColor: navBackground.color,
+                                backdropFilter: navBackground.blur
+                            }}
+                        />
+                        
                     </ul>
                     <div
                         className='slider rounded-full bg-blue-300'
@@ -158,7 +172,7 @@ function Navbar() {
                             left: sliderLeft,
                             width: sliderWidth,
                             transitionDuration: transitionDuration,
-                            transitionDelay: `${transitionDelay[0]}, ${transitionDelay[1]}, ${transitionDelay[2]}`
+                            transitionDelay: `${sliderOpacityTransitionDelay}, 0s, 0s`
                         }}
                     >
                     </div>

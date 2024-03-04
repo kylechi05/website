@@ -62,75 +62,76 @@
 
 @keyframes bg-animation {
     0%{
-        background-position: 0% 0%;
+        background-position: 0% -300vh;
     }
     5%{
-        background-position: 0% 100%;
+        background-position: 0% 0vh;
     }
     10%{
-        background-position: 33% 0%;
+        background-position: 33% -300vh;
     }
     15%{
-        background-position: 33% 100%;
+        background-position: 33% 0vh;
     }
     20%{
-        background-position: 66% 0%;
+        background-position: 66% -300vh;
     }
     25%{
-        background-position: 66% 100%;
+        background-position: 66% 0vh;
     }
     30%{
-        background-position: 100% 0%;
+        background-position: 100% -300vh;
     }
     35%{
-        background-position: 100% 100%;
+        background-position: 100% 0vh;
     }
     40%{
-        background-position: 0% 100%;
+        background-position: 0% 0vh;
     }
     45%{
-        background-position: 100% 50%;
+        background-position: 100% -150vh;
     }
     50%{
-        background-position: 0% 50%;
+        background-position: 0% -150vh;
     }
     55%{
-        background-position: 100% 0%;
+        background-position: 100% -300vh;
     }
     60%{
-        background-position: 66% 100%;
+        background-position: 66% 0vh;
     }
     65%{
-        background-position: 66% 0%;
+        background-position: 66% -300vh;
     }
     70%{
-        background-position: 33% 100%;
+        background-position: 33% 0vh;
     }
     75%{
-        background-position: 33% 0%;
+        background-position: 33% -300vh;
     }
     80%{
-        background-position: 0% 100%;
+        background-position: 0% 0vh;
     }
     85%{
-        background-position: 100% 50%;
+        background-position: 100% -150vh;
     }
     90%{
-        background-position: 0% 50%;
+        background-position: 0% -150vh;
     }
     95%{
-        background-position: 100% 0%;
+        background-position: 100% -300vh;
     }
     100%{
-        background-position: 0% 0%;
+        background-position: 0% -300vh;
     }
 }
 
 .gradient {
     position: relative;
     background-image: var(--color-gradient);
-    background-size: 300% 300%;
-    animation: bg-animation 240s infinite linear;
+    background-size: 800% 400vh;
+    background-repeat: no-repeat;
+    animation: bg-animation 120s infinite linear;
 }
 
 .gradient > * {
@@ -138,7 +139,7 @@
     position: relative;
 }
 
-.gradient::before {
+.gradient::after {
     content: "";
     position: absolute;
     top: 0;
@@ -146,5 +147,5 @@
     display: block;
     height: 100%;
     width: 100%;
-    background: linear-gradient(rgba(238, 230, 220, 0), rgb(238, 230, 220) 70%);
+    background-image: linear-gradient(180deg, rgba(238, 230, 220, 0), rgba(238, 230, 220, 1) 600px);
 }

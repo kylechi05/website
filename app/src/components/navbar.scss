@@ -16,6 +16,17 @@ li {
     }
 }
 
+.navigation-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    transition-property: background-color, backdrop-filter;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+}
+
 .slider {
     position: absolute;
     z-index: 1;
