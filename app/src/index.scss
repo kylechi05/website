@@ -18,39 +18,39 @@
 }
 
 .text-font {
-    color: rgb(19, 78, 74);
+    color: rgba(19, 78, 74, 0.724);
     font-family: "Quicksand", sans-serif;
     font-optical-sizing: auto;
-    font-weight: 600;
+    font-weight: 700;
     font-style: normal;
 }
 
 :root {
     --color-gradient: linear-gradient(
         45deg,
-        rgba(255, 208, 208, 0.9),
-        rgba(255, 235, 208, 0.9),
-        rgba(255, 235, 208, 0.9),
-        rgba(252, 255, 208, 0.9),
-        rgba(252, 255, 208, 0.9),
-        rgba(239, 255, 208, 0.9),
-        rgba(239, 255, 208, 0.9),
-        rgba(208, 255, 217, 0.9),
-        rgba(208, 255, 217, 0.9),
-        rgba(239, 255, 208, 0.9),
-        rgba(239, 255, 208, 0.9),
-        rgba(252, 255, 208, 0.9),
-        rgba(252, 255, 208, 0.9),
-        rgba(255, 235, 208, 0.9),
-        rgba(255, 235, 208, 0.9),
-        rgba(255, 208, 208, 0.9),
-        rgba(255, 235, 208, 0.9),
-        rgba(255, 235, 208, 0.9),
-        rgba(252, 255, 208, 0.9),
-        rgba(252, 255, 208, 0.9),
-        rgba(239, 255, 208, 0.9),
-        rgba(239, 255, 208, 0.9),
-        rgba(208, 255, 217, 0.9)
+        rgba(235, 188, 188, 1),
+        rgba(235, 215, 188, 1),
+        rgba(235, 215, 188, 1),
+        rgba(232, 235, 188, 1),
+        rgba(232, 235, 188, 1),
+        rgba(219, 235, 188, 1),
+        rgba(219, 235, 188, 1),
+        rgba(188, 235, 197, 1),
+        rgba(188, 235, 197, 1),
+        rgba(219, 235, 188, 1),
+        rgba(219, 235, 188, 1),
+        rgba(232, 235, 188, 1),
+        rgba(232, 235, 188, 1),
+        rgba(235, 215, 188, 1),
+        rgba(235, 215, 188, 1),
+        rgba(235, 188, 188, 1),
+        rgba(235, 215, 188, 1),
+        rgba(235, 215, 188, 1),
+        rgba(232, 235, 188, 1),
+        rgba(232, 235, 188, 1),
+        rgba(219, 235, 188, 1),
+        rgba(219, 235, 188, 1),
+        rgba(188, 235, 197, 1)
     ),
     linear-gradient(
         0deg,
@@ -131,7 +131,7 @@
     background-image: var(--color-gradient);
     background-size: 800% 400vh;
     background-repeat: no-repeat;
-    animation: bg-animation 120s infinite linear;
+    animation: bg-animation 240s infinite linear;
 }
 
 .gradient > * {

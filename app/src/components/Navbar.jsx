@@ -20,6 +20,8 @@ function Navbar() {
         transitionDuration: '0.2s'
     })
 
+    const [sliderColor, setSliderColor] = useState('rgb(255, 255, 255)')
+
     const [navBackground, setNavBackground] = useState({
         color: 'rgba(255, 255, 255, 0)',
         blur: 'blur(0px)'
@@ -55,7 +57,7 @@ function Navbar() {
             }
             handleClick(sessionStorage.getItem('activeTab')) // calls handleClick because handleClick moves the slider
             setSliderAttributes({
-                opacity: 0.5,
+                opacity: 0.6,
                 opacityTransitionDelay: '0.2s',
                 transitionDuration: '0.2s'
             })
@@ -91,11 +93,13 @@ function Navbar() {
                 color: 'rgba(255, 255, 255, 0.7)',
                 blur: 'blur(10px)'
             })
+            setSliderColor('rgb(203, 213,225)')
         } else {
             setNavBackground({
                 color: 'rgba(255, 255, 255, 0)',
                 blur: 'blur(0px)'
             })
+            setSliderColor('rgb(255, 255, 255)')
         }
     }
 
@@ -140,7 +144,7 @@ function Navbar() {
         }
         setSliderAttributes({
             ...sliderAttributes,
-            opacity: 0.5
+            opacity: 0.6
         })
     }, [])
 
@@ -158,7 +162,7 @@ function Navbar() {
         <div>
             <div className='fixed w-full'>
                 <nav className='flex relative justify-center items-center pt-5'>
-                    <ul className='flex relative p-2.5'>
+                    <ul className='flex relative p-2.5 text-font'>
                         <li onClick={() => handleClick('home')}><Link to="/" ref={homeRef}>Home</Link></li>
                         <li onClick={() => handleClick('about')}><Link to="/about" ref={aboutRef}>About</Link></li>
                         <li onClick={() => handleClick('projects')}><Link to="/projects" ref={projectsRef}>Projects</Link></li>
@@ -171,13 +175,14 @@ function Navbar() {
                         />
                     </ul>
                     <div
-                        className='slider rounded-full bg-blue-300'
+                        className='slider rounded-full'
                         style={{
                             width: sliderStatus.width,
                             left: sliderStatus.left,
                             opacity: sliderAttributes.opacity,
+                            backgroundColor: sliderColor,
                             transitionDuration: sliderAttributes.transitionDuration,
-                            transitionDelay: `${sliderAttributes.opacityTransitionDelay}, 0s, 0s`
+                            transitionDelay: `0s, 0s, ${sliderAttributes.opacityTransitionDelay}, 0s`
                         }}
                     >
                     </div>

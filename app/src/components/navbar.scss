@@ -1,6 +1,8 @@
 @use '../src/index.scss' as base;
 
-
+nav {
+    padding-left: calc(100vw - 100%);
+}
 
 li {
     position: relative;
@@ -32,6 +34,6 @@ li {
     z-index: 1;
     height: 50%;
     width: 100%;
-    transition-property: opacity, width, left;
+    transition-property: width, left, opacity, background-color;
     transition-timing-function: ease-in-out;
 }
