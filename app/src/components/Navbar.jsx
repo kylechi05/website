@@ -6,25 +6,24 @@ var linkValues = {}
 
 function Navbar() {
 
+    const homeRef = useRef()
+    const aboutRef = useRef()
+    const projectsRef = useRef()
+
+    const [sliderStatus, setSliderStatus] = useState({
+        width: null,
+        left: null
+    })
     const [sliderAttributes, setSliderAttributes] = useState({
         opacity: 0,
         opacityTransitionDelay: '0.2s',
         transitionDuration: '0.2s'
     })
 
-    const [sliderStatus, setSliderStatus] = useState({
-        width: null,
-        left: null
-    })
-
     const [navBackground, setNavBackground] = useState({
         color: 'rgba(255, 255, 255, 0)',
         blur: 'blur(0px)'
     })
-
-    const homeRef = useRef()
-    const aboutRef = useRef()
-    const projectsRef = useRef()
 
     const activeTab = sessionStorage.getItem('activeTab')
 
@@ -101,51 +100,28 @@ function Navbar() {
     }
 
     useEffect(() => {
-        /*
-            cannot change this if/else statement despite it looking redundant 
-            this is because when reloading, location.pathname will change but the states will be delayed
-            causing slider to be stuck one click behind
-        */
-        if (activeTab) {
-            switch(activeTab) {
-                case 'about':
-                    setSliderStatus({
-                        width: aboutRef.current.offsetWidth,
-                        left: aboutRef.current.getBoundingClientRect().left
-                    })
-                    break
-                case 'projects':
-                    setSliderStatus({
-                        width: projectsRef.current.offsetWidth,
-                        left: projectsRef.current.getBoundingClientRect().left
-                    })
-                    break
-                default:
-                    setSliderStatus({
-                        width: homeRef.current.offsetWidth,
-                        left: homeRef.current.getBoundingClientRect().left
-                    })
-            }
-        } else {
-            switch(location.pathname) {
-                case '/about':
-                    setSliderStatus({
-                        width: aboutRef.current.offsetWidth,
-                        left: aboutRef.current.getBoundingClientRect().left
-                    })
-                    break
-                case '/projects':
-                    setSliderStatus({
-                        width: projectsRef.current.offsetWidth,
-                        left: projectsRef.current.getBoundingClientRect().left
-                    })
-                    break
-                default:
-                    setSliderStatus({
-                        width: homeRef.current.offsetWidth,
-                        left: homeRef.current.getBoundingClientRect().left
-                    })
-            }
+        const currentTab = (activeTab != null)
+            ? activeTab
+            : location.pathname.substring(1)
+
+        switch(currentTab) {
+            case 'about':
+                setSliderStatus({
+                    width: aboutRef.current.offsetWidth,
+                    left: aboutRef.current.getBoundingClientRect().left
+                })
+                break
+            case 'projects':
+                setSliderStatus({
+                    width: projectsRef.current.offsetWidth,
+                    left: projectsRef.current.getBoundingClientRect().left
+                })
+                break
+            default:
+                setSliderStatus({
+                    width: homeRef.current.offsetWidth,
+                    left: homeRef.current.getBoundingClientRect().left
+                })
         }
 
         linkValues = {
