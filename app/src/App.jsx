@@ -1,9 +1,9 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar.jsx'
-import Home from './pages/Home.jsx'
-import About from './pages/About.jsx'
-import Projects from './pages/Projects.jsx'
+import Home from './pages/home/Home.jsx'
+import About from './pages/about/About.jsx'
+import Projects from './pages/projects/Projects.jsx'
 import PageNotFound from './pages/PageNotFound.jsx'
 import './index.scss'
 

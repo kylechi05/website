@@ -16,8 +16,8 @@ function Navbar() {
     })
     const [sliderAttributes, setSliderAttributes] = useState({
         opacity: 0,
-        opacityTransitionDelay: '0.2s',
-        transitionDuration: '0.2s'
+        opacityTransitionDelay: '0.25s',
+        transitionDuration: '0.25s'
     })
 
     const [sliderColor, setSliderColor] = useState('rgb(255, 255, 255)')
@@ -58,8 +58,8 @@ function Navbar() {
             handleClick(sessionStorage.getItem('activeTab')) // calls handleClick because handleClick moves the slider
             setSliderAttributes({
                 opacity: 0.6,
-                opacityTransitionDelay: '0.2s',
-                transitionDuration: '0.2s'
+                opacityTransitionDelay: '0.25s',
+                transitionDuration: '0.25s'
             })
         }, 500)
     }
@@ -164,7 +164,9 @@ function Navbar() {
                 <nav className='flex relative justify-center items-center pt-5'>
                     <ul className='flex relative p-2.5 text-font'>
                         <li onClick={() => handleClick('home')}><Link to="/" ref={homeRef}>Home</Link></li>
+                        <li><a>|</a></li>
                         <li onClick={() => handleClick('about')}><Link to="/about" ref={aboutRef}>About</Link></li>
+                        <li><a>|</a></li>
                         <li onClick={() => handleClick('projects')}><Link to="/projects" ref={projectsRef}>Projects</Link></li>
                         <div
                             className='navigation-background rounded-full'
