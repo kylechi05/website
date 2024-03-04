@@ -6,13 +6,11 @@ function Projects() {
     usePageTitle('Projects')
 
     return (
-        <>
-            <div
-                className='h-screen'
-            >
+        <div className='h-screen pt-24 '>
+            <header className='text-center header-font'>
                 Projects
-            </div>
-        </>
+            </header>
+        </div>
     )
 }
 

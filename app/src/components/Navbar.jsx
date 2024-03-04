@@ -11,6 +11,7 @@ function Navbar() {
     const [sliderWidth, setSliderWidth] = useState(null)
     const [sliderLeft, setSliderLeft] = useState(null)
     const [sliderOpacity, setSliderOpacity] = useState(0)
+    const [navBackground, setNavBackground] = useState('bg-white/0')
 
     const homeRef = useRef()
     const aboutRef = useRef()
@@ -20,6 +21,62 @@ function Navbar() {
 
     let location = useLocation()
     let timeout
+    
+    const handleResize = () => {
+        transitionDuration = '0s'
+        transitionDelay[0] = '0s'
+        setSliderOpacity(0)
+        clearTimeout(timeout)
+        timeout = setTimeout(() => {
+            linkValues = {
+                'home': {
+                    'width': homeRef.current.offsetWidth,
+                    'left': homeRef.current.getBoundingClientRect().left
+                },
+                'about': {
+                    'width': aboutRef.current.offsetWidth,
+                    'left': aboutRef.current.getBoundingClientRect().left
+                },
+                'projects': {
+                    'width': projectsRef.current.offsetWidth,
+                    'left': projectsRef.current.getBoundingClientRect().left
+                }
+            }
+            handleClick(sessionStorage.getItem('activeTab'))
+            transitionDuration = '0.2s'
+            transitionDelay[0] = '0.2s'
+            setSliderOpacity(0.5)
+        }, 500)
+    }
+
+    const handleClick = (currentTab) => {
+        switch(currentTab) {
+            case 'about':
+                setSliderWidth(linkValues.about.width)
+                setSliderLeft(linkValues.about.left)
+                break
+            case 'projects':
+                setSliderWidth(linkValues.projects.width)
+                setSliderLeft(linkValues.projects.left)
+                break
+            default:
+                setSliderWidth(linkValues.home.width)
+                setSliderLeft(linkValues.home.left)
+        }
+
+        sessionStorage.setItem('activeTab', currentTab)
+    }
+
+    const handleScroll = () => {
+        if (window.scrollY > 30) {
+            setNavBackground('bg-white/50') // need to add transition time for this
+            // need to set blur
+            // need to set slider div color
+            // changes for below are also needed
+        } else {
+            setNavBackground('bg-white/0')
+        }
+    }
 
     useEffect(() => {
         /*
@@ -71,61 +128,24 @@ function Navbar() {
                 'left': projectsRef.current.getBoundingClientRect().left
             }
         }
-        setSliderOpacity(0.75)
+        setSliderOpacity(0.5)
     }, [])
 
-    const handleClick = (currentTab) => {
-        switch(currentTab) {
-            case 'about':
-                setSliderWidth(linkValues.about.width)
-                setSliderLeft(linkValues.about.left)
-                break
-            case 'projects':
-                setSliderWidth(linkValues.projects.width)
-                setSliderLeft(linkValues.projects.left)
-                break
-            default:
-                setSliderWidth(linkValues.home.width)
-                setSliderLeft(linkValues.home.left)
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll)
+        window.addEventListener('resize', handleResize)
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll)
+            window.removeEventListener('resize', handleResize)
         }
-
-        sessionStorage.setItem('activeTab', currentTab)
-    }
-
-    const handleResize = () => {
-        transitionDuration = '0s'
-        transitionDelay[0] = '0s'
-        setSliderOpacity(0)
-        clearTimeout(timeout)
-        timeout = setTimeout(() => {
-            linkValues = {
-                'home': {
-                    'width': homeRef.current.offsetWidth,
-                    'left': homeRef.current.getBoundingClientRect().left
-                },
-                'about': {
-                    'width': aboutRef.current.offsetWidth,
-                    'left': aboutRef.current.getBoundingClientRect().left
-                },
-                'projects': {
-                    'width': projectsRef.current.offsetWidth,
-                    'left': projectsRef.current.getBoundingClientRect().left
-                }
-            }
-            handleClick(sessionStorage.getItem('activeTab'))
-            transitionDuration = '0.2s'
-            transitionDelay[0] = '0.2s'
-            setSliderOpacity(0.75)
-        }, 500)
-    }
-
-    window.addEventListener('resize', handleResize)
+    }, [])    
 
     return (
-        <>
+        <div>
             <div className='fixed w-full'>
                 <nav className='flex relative justify-center items-center pt-5'>
-                    <ul className='flex relative p-2.5 rounded-full '>
+                    <ul className={`flex relative p-2.5 rounded-full ${navBackground}`}>
                         <li onClick={() => handleClick('home')}><Link to="/" ref={homeRef}>Home</Link></li>
                         <li onClick={() => handleClick('about')}><Link to="/about" ref={aboutRef}>About</Link></li>
                         <li onClick={() => handleClick('projects')}><Link to="/projects" ref={projectsRef}>Projects</Link></li>
@@ -141,10 +161,11 @@ function Navbar() {
                         }}
                     >
                 </div>
-                </nav>  
+                </nav>
+                
             </div>
             <Outlet />
-        </>
+        </div>
     )
 }
 

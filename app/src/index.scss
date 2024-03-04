@@ -8,7 +8,16 @@
     }
 }
 
-* {
+.header-font {
+    color: rgb(19, 78, 74);
+    font-family: "Raleway", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: clamp(3rem, 8vw, 6rem);
+}
+
+.text-font {
     color: rgb(19, 78, 74);
     font-family: "Quicksand", sans-serif;
     font-optical-sizing: auto;
@@ -118,8 +127,10 @@
 }
 
 .gradient {
-   background: linear-gradient(rgba(238, 230, 220, 0), rgba(238, 230, 220, 1) 70%);
-   position: relative;
+    position: relative;
+    background-image: var(--color-gradient);
+    background-size: 300% 300%;
+    animation: bg-animation 240s infinite linear;
 }
 
 .gradient > * {
@@ -127,16 +138,13 @@
     position: relative;
 }
 
-.gradient::after {
+.gradient::before {
     content: "";
-    mix-blend-mode: overlay;
     position: absolute;
     top: 0;
     left: 0;
     display: block;
     height: 100%;
     width: 100%;
-    background-size: 500% 500%;
-    background-image: var(--color-gradient);
-    animation: bg-animation 240s infinite linear;
+    background: linear-gradient(rgba(238, 230, 220, 0), rgb(238, 230, 220) 70%);
 }

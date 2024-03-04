@@ -6,10 +6,13 @@ function About() {
     usePageTitle("About")
 
     return (
-        <>
-            <div
-                className='h-screen'
-            >
+        <div className=''>
+            <header className='pt-24 text-center header-font'>
+                About Me
+            </header>
+            <img src='../empty_pfp.png' />
+            <img src='../empty_pfp.png' />
+            <div>
                 About
                 <a
                     href="Resume - Kyle Chi.pdf"
@@ -30,7 +33,7 @@ function About() {
                     LinkedIn
                 </a>
             </div>
-        </>
+        </div>
     )
 }
 
