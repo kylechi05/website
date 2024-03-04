@@ -1,28 +1,26 @@
 @use '../src/index.scss' as base;
 
-nav {
-    ul {
-        z-index: 2;
-        li {
-            position: relative;
-            display: flex;
-            a {
-                padding: 6px 16px;
-                margin: 0 5px;
-                @include base.mdBreakpoint {
-                    padding: 6px 20px;
-                    margin: 0 10px;
-                }
-            }
+
+
+li {
+    position: relative;
+    display: flex;
+    z-index: 2;
+    a {
+        padding: 6px 16px;
+        margin: 0 5px;
+        @include base.mdBreakpoint {
+            padding: 6px 20px;
+            margin: 0 10px;
         }
-    }
-    .slider {
-        position: absolute;
-        z-index: 1;
-        height: 50%;
-        width: 100%;
-        transition-property: opacity, width, left;
-        transition-timing-function: ease-in-out;
     }
 }
 
+.slider {
+    position: absolute;
+    z-index: 1;
+    height: 50%;
+    width: 100%;
+    transition-property: opacity, width, left;
+    transition-timing-function: ease-in-out;
+}

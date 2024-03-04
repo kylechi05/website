@@ -69,7 +69,7 @@ function Navbar() {
 
     const handleScroll = () => {
         if (window.scrollY > 30) {
-            setNavBackground('bg-white/50') // need to add transition time for this
+            setNavBackground('bg-white/50 backdrop-blur-md') // need to add transition time for this
             // need to set blur
             // need to set slider div color
             // changes for below are also needed
@@ -145,13 +145,14 @@ function Navbar() {
         <div>
             <div className='fixed w-full'>
                 <nav className='flex relative justify-center items-center pt-5'>
-                    <ul className={`flex relative p-2.5 rounded-full ${navBackground}`}>
+                    <ul className='flex relative p-2.5'>
                         <li onClick={() => handleClick('home')}><Link to="/" ref={homeRef}>Home</Link></li>
                         <li onClick={() => handleClick('about')}><Link to="/about" ref={aboutRef}>About</Link></li>
                         <li onClick={() => handleClick('projects')}><Link to="/projects" ref={projectsRef}>Projects</Link></li>
+                        <div className={`absolute top-0 left-0 w-full h-full rounded-full ${navBackground}`}></div>
                     </ul>
                     <div
-                        className='slider rounded-full bg-white'
+                        className='slider rounded-full bg-blue-300'
                         style={{
                             opacity: sliderOpacity,
                             left: sliderLeft,
@@ -160,9 +161,8 @@ function Navbar() {
                             transitionDelay: `${transitionDelay[0]}, ${transitionDelay[1]}, ${transitionDelay[2]}`
                         }}
                     >
-                </div>
+                    </div>
                 </nav>
-                
             </div>
             <Outlet />
         </div>
