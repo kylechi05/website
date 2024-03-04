@@ -6,11 +6,16 @@ var linkValues = {}
 
 function Navbar() {
 
-    const [sliderWidth, setSliderWidth] = useState(null) // refactor so most become one object "sliderAttributes"
-    const [sliderLeft, setSliderLeft] = useState(null)
-    const [transitionDuration, setTransitionDuration] = useState('0.2s')
-    const [sliderOpacity, setSliderOpacity] = useState(0) 
-    const [sliderOpacityTransitionDelay] = useState('0.2s')
+    const [sliderAttributes, setSliderAttributes] = useState({
+        opacity: 0,
+        opacityTransitionDelay: '0.2s',
+        transitionDuration: '0.2s'
+    })
+
+    const [sliderStatus, setSliderStatus] = useState({
+        width: null,
+        left: null
+    })
 
     const [navBackground, setNavBackground] = useState({
         color: 'rgba(255, 255, 255, 0)',
@@ -27,9 +32,12 @@ function Navbar() {
     let timeout
     
     const handleResize = () => {
-        setTransitionDuration('0s')
-        setSliderOpacityTransitionDelay('0s')
-        setSliderOpacity(0)
+        setSliderAttributes({
+            opacity: 0,
+            opacityTransitionDelay: '0s',
+            transitionDuration: '0s'
+        })
+        
         clearTimeout(timeout)
         timeout = setTimeout(() => {
             linkValues = {
@@ -46,28 +54,35 @@ function Navbar() {
                     'left': projectsRef.current.getBoundingClientRect().left
                 }
             }
-            handleClick(sessionStorage.getItem('activeTab'))
-            setTransitionDuration('0.2s')
-            setSliderOpacityTransitionDelay('0.2s')
-            setSliderOpacity(0.5)
+            handleClick(sessionStorage.getItem('activeTab')) // calls handleClick because handleClick moves the slider
+            setSliderAttributes({
+                opacity: 0.5,
+                opacityTransitionDelay: '0.2s',
+                transitionDuration: '0.2s'
+            })
         }, 500)
     }
 
     const handleClick = (currentTab) => {
         switch(currentTab) {
             case 'about':
-                setSliderWidth(linkValues.about.width)
-                setSliderLeft(linkValues.about.left)
+                setSliderStatus({
+                    width: linkValues.about.width,
+                    left: linkValues.about.left
+                })
                 break
             case 'projects':
-                setSliderWidth(linkValues.projects.width)
-                setSliderLeft(linkValues.projects.left)
+                setSliderStatus({
+                    width: linkValues.projects.width,
+                    left: linkValues.projects.left
+                })
                 break
             default:
-                setSliderWidth(linkValues.home.width)
-                setSliderLeft(linkValues.home.left)
+                setSliderStatus({
+                    width: linkValues.home.width,
+                    left: linkValues.home.left
+                })
         }
-
         sessionStorage.setItem('activeTab', currentTab)
     }
 
@@ -94,30 +109,42 @@ function Navbar() {
         if (activeTab) {
             switch(activeTab) {
                 case 'about':
-                    setSliderWidth(aboutRef.current.offsetWidth)
-                    setSliderLeft(aboutRef.current.getBoundingClientRect().left)
+                    setSliderStatus({
+                        width: aboutRef.current.offsetWidth,
+                        left: aboutRef.current.getBoundingClientRect().left
+                    })
                     break
                 case 'projects':
-                    setSliderWidth(projectsRef.current.offsetWidth)
-                    setSliderLeft(projectsRef.current.getBoundingClientRect().left)
+                    setSliderStatus({
+                        width: projectsRef.current.offsetWidth,
+                        left: projectsRef.current.getBoundingClientRect().left
+                    })
                     break
                 default:
-                    setSliderWidth(homeRef.current.offsetWidth)
-                    setSliderLeft(homeRef.current.getBoundingClientRect().left)
+                    setSliderStatus({
+                        width: homeRef.current.offsetWidth,
+                        left: homeRef.current.getBoundingClientRect().left
+                    })
             }
         } else {
             switch(location.pathname) {
                 case '/about':
-                    setSliderWidth(aboutRef.current.offsetWidth)
-                    setSliderLeft(aboutRef.current.getBoundingClientRect().left)
+                    setSliderStatus({
+                        width: aboutRef.current.offsetWidth,
+                        left: aboutRef.current.getBoundingClientRect().left
+                    })
                     break
                 case '/projects':
-                    setSliderWidth(projectsRef.current.offsetWidth)
-                    setSliderLeft(projectsRef.current.getBoundingClientRect().left)
+                    setSliderStatus({
+                        width: projectsRef.current.offsetWidth,
+                        left: projectsRef.current.getBoundingClientRect().left
+                    })
                     break
                 default:
-                    setSliderWidth(homeRef.current.offsetWidth)
-                    setSliderLeft(homeRef.current.getBoundingClientRect().left)
+                    setSliderStatus({
+                        width: homeRef.current.offsetWidth,
+                        left: homeRef.current.getBoundingClientRect().left
+                    })
             }
         }
 
@@ -135,7 +162,10 @@ function Navbar() {
                 'left': projectsRef.current.getBoundingClientRect().left
             }
         }
-        setSliderOpacity(0.5)
+        setSliderAttributes({
+            ...sliderAttributes,
+            opacity: 0.5
+        })
     }, [])
 
     useEffect(() => {
@@ -163,16 +193,15 @@ function Navbar() {
                                 backdropFilter: navBackground.blur
                             }}
                         />
-                        
                     </ul>
                     <div
                         className='slider rounded-full bg-blue-300'
                         style={{
-                            opacity: sliderOpacity,
-                            left: sliderLeft,
-                            width: sliderWidth,
-                            transitionDuration: transitionDuration,
-                            transitionDelay: `${sliderOpacityTransitionDelay}, 0s, 0s`
+                            width: sliderStatus.width,
+                            left: sliderStatus.left,
+                            opacity: sliderAttributes.opacity,
+                            transitionDuration: sliderAttributes.transitionDuration,
+                            transitionDelay: `${sliderAttributes.opacityTransitionDelay}, 0s, 0s`
                         }}
                     >
                     </div>
