@@ -1,5 +1,6 @@
 import React from 'react'
 import usePageTitle from '../../hooks/usePageTitle'
+import Header from '../../components/Header'
 import './about.scss'
 
 function About() {
@@ -8,13 +9,17 @@ function About() {
 
     return (
         <div className='about-me'>
-            <header className='pt-24 text-center header-font'>
-                About Me
-            </header>
+            <Header content="About Me" />
             <div className='content'>
-                <div className='biography text-font text-lg'>
+                <div className='biography text-font text-xl'>
                     <img className='profile-picture' src='../empty_pfp.png' />
-                    <div className='description'>Description of Myself</div>             
+                    <div className='description'>
+                        <h1 className='header-font'>I'm Kyle Chi, a computer science student at the University of Iowa.</h1>
+                        <br />
+                        <p>
+                            Currently, I'm a student researcher at UIowa learning and working on Deep Learning with Pytorch.
+                        </p>
+                    </div>             
                 </div>
                 <div className='activities'>
                     <div className='experiences'>

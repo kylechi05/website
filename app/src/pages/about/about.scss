@@ -1,6 +1,6 @@
 @use '../src/index.scss' as base;
 
-$profile-picture-dimensions: clamp(20rem, 35vw, 32rem);
+$profile-picture-dimensions: clamp(20rem, 35vw, 32rem); // change this to by dynamic, the text gets squished when changing vw
 
 .biography {
     display: flex;
@@ -23,6 +23,14 @@ $profile-picture-dimensions: clamp(20rem, 35vw, 32rem);
 .description {
     margin: 3rem 0 0 0;
     @include base.mdBreakpoint {
-        margin: 0 0 0 6rem;
+        margin: 0 0 0 5rem;
+    }
+    h1 {
+        font-size: clamp(1.75rem, 3.5vw, 3.5rem);
+        line-height: clamp(2rem, 4vw, 6rem);
+        text-align: center;
+        @include base.mdBreakpoint {
+            text-align: left;
+        }
     }
 }

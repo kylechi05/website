@@ -1,15 +1,14 @@
 import React from 'react'
 import usePageTitle from '../../hooks/usePageTitle'
+import Header from '../../components/Header'
 
 function Projects() {
 
     usePageTitle('Projects')
 
     return (
-        <div className='h-screen pt-24 '>
-            <header className='text-center header-font'>
-                Projects
-            </header>
+        <div className='h-screen'>
+            <Header content="Projects" />
             <div className='content'>
                 <div className='completed'>
                     UI Grades
