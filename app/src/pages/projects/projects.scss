@@ -1,0 +1,17 @@
+.project-container {
+    transform-style: preserve-3d;
+}
+
+.project {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    background-color: rgb(185, 149, 253);
+    transform: perspective(1000px) translateX(-200px) rotateY(20deg);
+    transition-duration: 1s;
+    transition-timing-function: cubic-bezier(0.20, 0.45, 0.15, 1);
+}
+
+.project:hover {
+    transform: perspective(1000px) translateX(-200px) rotateY(0deg);
+}

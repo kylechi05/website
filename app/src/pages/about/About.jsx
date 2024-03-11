@@ -17,7 +17,9 @@ function About() {
                         <h1 className='header-font'>I'm Kyle Chi, a computer science student at the University of Iowa.</h1>
                         <br />
                         <p>
-                            Currently, I'm a student researcher at UIowa learning and working on Deep Learning with Pytorch.
+                            Currently, I'm a student researcher at {' '}
+                            <a href='https://uiowa.edu/' target='_blank' className='underline'>UIowa</a>
+                            {' '} working on Deep Learning.
                         </p>
                     </div>             
                 </div>
