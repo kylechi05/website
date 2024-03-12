@@ -142,13 +142,14 @@ p {
 }
 
 .gradient > * {
-    z-index: 10;
     position: relative;
+    z-index: 1;
 }
 
 .gradient::after {
     content: "";
     position: absolute;
+    z-index: 0;
     top: 0;
     left: 0;
     display: block;

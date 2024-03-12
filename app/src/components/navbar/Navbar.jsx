@@ -160,7 +160,7 @@ function Navbar() {
 
     return (
         <div>
-            <div className='fixed w-full'>
+            <div className='fixed w-full z-20'>
                 <nav className='flex relative justify-center items-center pt-5'>
                     <ul className='flex relative p-2.5 text-font'>
                         <li onClick={() => handleClick('home')}><Link to="/" ref={homeRef}>Home</Link></li>

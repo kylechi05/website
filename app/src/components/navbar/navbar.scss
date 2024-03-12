@@ -2,38 +2,38 @@
 
 nav {
     padding-left: calc(100vw - 100%);
-}
-
-li {
-    position: relative;
-    display: flex;
-    z-index: 2;
-    a {
-        padding: 6px 10px;
-        margin: 0 5px;
-        @include base.mdBreakpoint {
-            padding: 6px 16px;
-            margin: 0 10px;
+    z-index: 100000;
+    li {
+        position: relative;
+        display: flex;
+        z-index: 2;
+        a {
+            padding: 6px 10px;
+            margin: 0 5px;
+            @include base.mdBreakpoint {
+                padding: 6px 16px;
+                margin: 0 10px;
+            }
         }
     }
-}
-
-.navigation-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    transition-property: background-color, backdrop-filter;
-    transition-duration: 0.25s;
-    transition-timing-function: ease-in-out;
-}
-
-.slider {
-    position: absolute;
-    z-index: 1;
-    height: 50%;
-    width: 100%;
-    transition-property: width, left, opacity, background-color;
-    transition-timing-function: ease-in-out;
+    
+    .navigation-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        transition-property: background-color, backdrop-filter;
+        transition-duration: 0.25s;
+        transition-timing-function: ease-in-out;
+    }
+    
+    .slider {
+        position: absolute;
+        z-index: 1;
+        height: 50%;
+        width: 100%;
+        transition-property: width, left, opacity, background-color;
+        transition-timing-function: ease-in-out;
+    }
 }
