@@ -1,14 +1,21 @@
-import React from 'react'
+import React, { useRef, useEffect } from 'react'
 import usePageTitle from '../../hooks/usePageTitle'
 import Header from '../../components/Header'
+import Navbar from '../../components/navbar/Navbar.jsx'
 import './home.scss'
 
 function Home() {
 
-    usePageTitle('Home')
+    const pageRef = useRef(null)
+
+    useEffect(() => {
+        pageRef.current.scrollIntoView()
+        usePageTitle('Home')
+    }, [])
 
     return (
-        <div className='h-screen'>
+        <div ref={pageRef} className='h-screen'>
+            <Navbar />
             <Header content="Hi. I'm Kyle" />
            
         </div>

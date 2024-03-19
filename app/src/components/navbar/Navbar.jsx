@@ -1,196 +1,201 @@
-import React, { useState, useRef, useEffect } from 'react'
-import { Link, Outlet, useLocation } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import './navbar.scss'
-
-var linkValues = {}
 
 function Navbar() {
 
-    const homeRef = useRef()
-    const aboutRef = useRef()
-    const projectsRef = useRef()
 
-    const [sliderStatus, setSliderStatus] = useState({
-        width: null,
-        left: null
-    })
-    const [sliderAttributes, setSliderAttributes] = useState({
-        opacity: 0,
-        opacityTransitionDelay: '0.25s',
-        transitionDuration: '0.25s'
-    })
+    const [menuClicked, setMenuClicked] = useState(false)
+    const [expandMobileMenu, setExpandMobileMenu] = useState('translateX(100%)')
+    const [strokeDashOffset, setStrokeDashOffset] = useState(0)
 
-    const [sliderColor, setSliderColor] = useState('rgb(255, 255, 255)')
+    const [currentTab, setCurrentTab] = useState(null)
 
     const [navBackground, setNavBackground] = useState({
         color: 'rgba(255, 255, 255, 0)',
-        blur: 'blur(0px)'
+        blur: 'blur(0px)',
+        focus: 'rgba(86, 193, 114, 0)'
     })
 
-    const activeTab = sessionStorage.getItem('activeTab')
-
     let location = useLocation()
-    let timeout
-    
-    const handleResize = () => {
-        setSliderAttributes({
-            opacity: 0,
-            opacityTransitionDelay: '0s',
-            transitionDuration: '0s'
-        })
-        
-        clearTimeout(timeout)
-        timeout = setTimeout(() => {
-            linkValues = {
-                'home': {
-                    'width': homeRef.current.offsetWidth,
-                    'left': homeRef.current.getBoundingClientRect().left
-                },
-                'about': {
-                    'width': aboutRef.current.offsetWidth,
-                    'left': aboutRef.current.getBoundingClientRect().left
-                },
-                'projects': {
-                    'width': projectsRef.current.offsetWidth,
-                    'left': projectsRef.current.getBoundingClientRect().left
-                }
-            }
-            handleClick(sessionStorage.getItem('activeTab')) // calls handleClick because handleClick moves the slider
-            setSliderAttributes({
-                opacity: 0.6,
-                opacityTransitionDelay: '0.25s',
-                transitionDuration: '0.25s'
-            })
-        }, 500)
-    }
-
-    const handleClick = (currentTab) => {
-        switch(currentTab) {
-            case 'about':
-                setSliderStatus({
-                    width: linkValues.about.width,
-                    left: linkValues.about.left
-                })
-                break
-            case 'projects':
-                setSliderStatus({
-                    width: linkValues.projects.width,
-                    left: linkValues.projects.left
-                })
-                break
-            default:
-                setSliderStatus({
-                    width: linkValues.home.width,
-                    left: linkValues.home.left
-                })
-        }
-        sessionStorage.setItem('activeTab', currentTab)
-    }
-
-    const handleScroll = () => {
-        if (window.scrollY > 30) {
-            setNavBackground({
-                color: 'rgba(255, 255, 255, 0.7)',
-                blur: 'blur(10px)'
-            })
-            setSliderColor('rgb(203, 213,225)')
-        } else {
-            setNavBackground({
-                color: 'rgba(255, 255, 255, 0)',
-                blur: 'blur(0px)'
-            })
-            setSliderColor('rgb(255, 255, 255)')
-        }
-    }
 
     useEffect(() => {
-        const currentTab = (activeTab != null)
-            ? activeTab
-            : location.pathname.substring(1)
-
-        switch(currentTab) {
-            case 'about':
-                setSliderStatus({
-                    width: aboutRef.current.offsetWidth,
-                    left: aboutRef.current.getBoundingClientRect().left
-                })
+        switch(location.pathname) {
+            case '/about':
+                setCurrentTab('about')
                 break
-            case 'projects':
-                setSliderStatus({
-                    width: projectsRef.current.offsetWidth,
-                    left: projectsRef.current.getBoundingClientRect().left
-                })
+            case '/projects':
+                setCurrentTab('projects')
                 break
             default:
-                setSliderStatus({
-                    width: homeRef.current.offsetWidth,
-                    left: homeRef.current.getBoundingClientRect().left
-                })
+                setCurrentTab('home')
         }
 
-        linkValues = {
-            'home': {
-                'width': homeRef.current.offsetWidth,
-                'left': homeRef.current.getBoundingClientRect().left
-            },
-            'about': {
-                'width': aboutRef.current.offsetWidth,
-                'left': aboutRef.current.getBoundingClientRect().left
-            },
-            'projects': {
-                'width': projectsRef.current.offsetWidth,
-                'left': projectsRef.current.getBoundingClientRect().left
-            }
-        }
-        setSliderAttributes({
-            ...sliderAttributes,
-            opacity: 0.6
-        })
-    }, [])
-
-    useEffect(() => {
         window.addEventListener('scroll', handleScroll)
-        window.addEventListener('resize', handleResize)
 
         return () => {
             window.removeEventListener('scroll', handleScroll)
-            window.removeEventListener('resize', handleResize)
         }
-    }, [])    
+    }, [])
+
+    const handleClick = (currentTab) => {
+        setCurrentTab(currentTab)
+    }
+
+    const handleScroll = () => {
+        if (window.scrollY > 50) {
+            setNavBackground({
+                color: 'rgba(255, 255, 255, 0.7)',
+                blur: 'blur(8px)',
+                focus: 'rgba(86, 193, 114, 0.35)'
+            })
+        } else {
+            setNavBackground({
+                color: 'rgba(255, 255, 255, 0)',
+                blur: 'blur(0px)',
+                focus: 'rgba(86, 193, 114, 0)'
+            })
+        }
+    }
+
+    const handleMenuClick = () => {
+        setMenuClicked((menuClicked) => !menuClicked)
+        setExpandMobileMenu((expandMobileMenu) => expandMobileMenu === 'translateX(100%)' ? 'translateX(0%)' : 'translateX(100%)')
+        setStrokeDashOffset((strokeDashOffset) => strokeDashOffset === -138 ? 0 : -138)
+    }
 
     return (
-        <div>
-            <div className='fixed w-full z-20'>
-                <nav className='flex relative justify-center items-center pt-5'>
-                    <ul className='flex relative p-2.5 text-font'>
-                        <li onClick={() => handleClick('home')}><Link to="/" ref={homeRef}>Home</Link></li>
-                        <li><a>|</a></li>
-                        <li onClick={() => handleClick('about')}><Link to="/about" ref={aboutRef}>About</Link></li>
-                        <li><a>|</a></li>
-                        <li onClick={() => handleClick('projects')}><Link to="/projects" ref={projectsRef}>Projects</Link></li>
-                        <div
-                            className='navigation-background rounded-full'
-                            style={{
-                                backgroundColor: navBackground.color,
-                                backdropFilter: navBackground.blur
-                            }}
-                        />
+        <div className='fixed w-full z-20'>
+            <nav
+                className='navigation-background relative w-full h-20 flex justify-between items-center'
+                style={{
+                    backgroundColor: navBackground.color,
+                    backdropFilter: navBackground.blur,
+                    transitionDuration: '0.25s',
+                    transitionTimingFunction: 'ease-in'
+                }}
+            >
+                <div className='text-font w-full h-full flex justify-start items-center pl-8'>Kyle Chi</div>
+                <div className='flex w-full h-full'>
+                    {/* web navigation for wide screens */}
+                    <ul className='hidden sm:flex relative w-full justify-end text-font'>
+                        <li
+                            key={'home  '}
+                            onClick={() => handleClick('home')}
+                            style={
+                                currentTab == 'home'
+                                    ? {
+                                        fontWeight: '800',
+                                        backgroundColor: navBackground.focus
+                                    }
+                                    : {
+                                        fontWeight: '600',
+                                    }
+                            }
+                        >
+                            <Link 
+                                to="/"
+                            >
+                                Home
+                            </Link>
+                        </li>
+                        <li
+                            onClick={() => handleClick('about')}
+                            style={
+                                currentTab == 'about'
+                                    ? {
+                                        fontWeight: '800',
+                                        backgroundColor: navBackground.focus
+                                    }
+                                    : {
+                                        fontWeight: '600',
+                                    }
+                            }
+                        >
+                            <Link
+                                to="/about"
+                            >
+                                    About
+                            </Link>
+                        </li>
+                        <li
+                            onClick={() => handleClick('projects')}
+                            style={
+                                currentTab == 'projects'
+                                    ? {
+                                        fontWeight: '800',
+                                        backgroundColor: navBackground.focus
+                                    }
+                                    : {
+                                        fontWeight: '600',
+                                    }
+                            }
+                        >
+                            <Link
+                                to="/projects"
+                            >
+                                Projects
+                            </Link>
+                        </li>
                     </ul>
-                    <div
-                        className='slider rounded-full'
-                        style={{
-                            width: sliderStatus.width,
-                            left: sliderStatus.left,
-                            opacity: sliderAttributes.opacity,
-                            backgroundColor: sliderColor,
-                            transitionDuration: sliderAttributes.transitionDuration,
-                            transitionDelay: `0s, 0s, ${sliderAttributes.opacityTransitionDelay}, 0s`
-                        }}
-                    >
+
+                    {/* mobile navigation menu for small screens */}
+                    <div className='flex sm:hidden w-full h-full p-4 justify-end'>
+                        <svg
+                            className='nav-menu'
+                            style={{strokeDashoffset: strokeDashOffset}}
+                            onClick={handleMenuClick}
+                            viewBox='0 0 100 100'>
+                            <path
+                                className='menu-ends'
+                                d='m0,27 h70 c15,0,15,46,0,46 h-12 l-46,-46'
+                            />
+                            <path
+                                className='menu-middle'      
+                                d='m20,50 h15 m35,0 h-35'
+                            />
+                            <path
+                                className='menu-ends'
+                                d='m0,73 h70 c15,0,15,-46,0,-46 h-12 l-46,46'
+                            /> 
+                        </svg>
                     </div>
-                </nav>
+                </div>
+            </nav>
+            <div
+                className='fixed right-0 top-20 flex flex-col h-[calc(100%-80px)] justify-start bg-white/50 backdrop-blur-sm'
+                style={{
+                    width: 'clamp(15rem, 80vw, 25rem)',
+                    transform: expandMobileMenu,
+                    transitionDuration:'0.35s',
+                }}
+            >
+                <Link to='/' className='menu-link'>
+                    Home
+                </Link>
+                <div className='menu-separator'>
+                    <svg viewBox='0 0 1000 2'>
+                        <path stroke='gray' strokeWidth='3' d='m120,0 h760' />
+                    </svg>
+                </div>
+                <Link to='/about' className='menu-link'>
+                    About
+                </Link>
+                <div className='menu-separator'>
+                    <svg viewBox='0 0 1000 2'>
+                        <path stroke='gray' strokeWidth='3' d='m120,0 h760' />
+                    </svg>
+                </div>
+                <Link to='/projects' className='menu-link'>
+                    Projects
+                </Link>
             </div>
-            <Outlet />
+            {menuClicked && 
+                <div
+                    className='fixed top-0 left-0 w-full h-full -z-10'
+                    onClick={handleMenuClick}
+                />
+            }
         </div>
     )
 }

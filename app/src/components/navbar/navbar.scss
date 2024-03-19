@@ -1,39 +1,54 @@
 @use '../src/index.scss' as base;
 
 nav {
-    padding-left: calc(100vw - 100%);
-    z-index: 100000;
+    z-index: 1000;
     li {
         position: relative;
-        display: flex;
         z-index: 2;
+        display: flex;
+        transition-duration: 0.25s;
         a {
-            padding: 6px 10px;
-            margin: 0 5px;
+            padding: 28px;
             @include base.mdBreakpoint {
-                padding: 6px 16px;
-                margin: 0 10px;
+                padding: 28px 36px;
             }
         }
     }
-    
-    .navigation-background {
-        position: absolute;
-        top: 0;
-        left: 0;
+
+    .nav-menu {
+        path {
+            stroke:rgb(161, 161, 170);
+            fill: none;
+            stroke-width: 6;
+            stroke-linejoin: round;
+            stroke-linecap: round;
+            transition-duration: 0.35s;
+            transition-timing-function: ease-in-out;
+        }
+      
+        .menu-ends {
+            stroke-dasharray: 70 1000;
+        }
+      
+        .menu-middle {
+            stroke-dasharray: 55 1000;
+        }
+    }
+}
+
+.menu-link {
+    display: flex;
+    height: 15%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu-separator {
+    height: 0.25rem;
+    width: 100%;
+    svg {
         height: 100%;
         width: 100%;
-        transition-property: background-color, backdrop-filter;
-        transition-duration: 0.25s;
-        transition-timing-function: ease-in-out;
-    }
-    
-    .slider {
-        position: absolute;
-        z-index: 1;
-        height: 50%;
-        width: 100%;
-        transition-property: width, left, opacity, background-color;
-        transition-timing-function: ease-in-out;
     }
 }
