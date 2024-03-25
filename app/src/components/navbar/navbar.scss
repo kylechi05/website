@@ -1,7 +1,7 @@
 @use '../src/index.scss' as base;
 
 nav {
-    z-index: 1000;
+    z-index: 10;
     li {
         position: relative;
         z-index: 2;
