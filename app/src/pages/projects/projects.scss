@@ -35,6 +35,10 @@
         }
     }
 
+    .project:hover {
+        transform: translateY(-15px);
+    }
+
     .project-img {
         border-radius: calc(clamp(1rem, 3vw, 2rem) - clamp(0.5rem, 1.5vw, 1.5rem));
 

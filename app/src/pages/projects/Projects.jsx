@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react'
-import { useOutletContext } from 'react-router-dom'
+import { Link, useOutletContext, useNavigate } from 'react-router-dom'
 import usePageTitle from '../../hooks/usePageTitle'
 import Header from '../../components/Header'
 import Navbar from '../../components/navbar/Navbar.jsx'
@@ -8,8 +8,9 @@ import './projects.scss'
 function Projects() {
 
     const pageRef = useRef(null)
-
+    const [clicked, setClicked] = useState(true)
     const handleProjectClick = useOutletContext()
+    const navigate = useNavigate()
 
     useEffect(() => {
         pageRef.current.scrollIntoView()
@@ -17,49 +18,25 @@ function Projects() {
     }, [])
 
     const DelayedLink = ({ to, children }) => {
-        const [projectStyle, setProjectStyle] = useState({
-            translateY: 'translateY(0px)',
-            scale: 'scale(1)'
-        })
-        let timeout
-
-        function handleClick() {
-            handleProjectClick()
-            setProjectStyle({
-                ...projectStyle,
-                scale: 'scale(1.05)'
-            })
-            timeout = setTimeout(() => {
-                window.location.href = to
-            }, 2000)
-        }
-        
-        function handleMouseEnter() {
-            setProjectStyle({
-                ...projectStyle,
-                translateY: 'translateY(-15px)'
-            })
-        }
-
-        function handleMouseLeave() {
-            setProjectStyle({
-                ...projectStyle,
-                translateY: 'translateY(0px)'
-            })
+        const handleClick = (e) => {
+            e.preventDefault()
+            if (clicked) {
+                setClicked(false)
+                handleProjectClick()
+                setTimeout(() => {
+                    setClicked(true)
+                    navigate(to)
+                }, 750)
+            }
         }
 
         return (
-            <a
+            <Link
                 onClick={handleClick}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
                 className='project'
-                style={{
-                    transform: projectStyle.translateY + projectStyle.scale
-                }}
             >
                 {children}
-            </a>
+            </Link>
         )
     }
 
