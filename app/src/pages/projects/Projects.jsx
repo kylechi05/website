@@ -7,8 +7,8 @@ import './projects.scss'
 
 function Projects() {
 
+    const [notClicked, setNotClicked] = useState(true)
     const pageRef = useRef(null)
-    const [clicked, setClicked] = useState(true)
     const handleProjectClick = useOutletContext()
     const navigate = useNavigate()
 
@@ -17,14 +17,19 @@ function Projects() {
         usePageTitle('Projects')
     }, [])
 
+    const [scale, setScale] = useState(false)
     const DelayedLink = ({ to, children }) => {
+
         const handleClick = (e) => {
+
             e.preventDefault()
-            if (clicked) {
-                setClicked(false)
+            if (notClicked) {
+                setNotClicked(false)
+                setScale(true)
                 handleProjectClick()
                 setTimeout(() => {
-                    setClicked(true)
+                    setNotClicked(true)
+                    setScale(false)
                     navigate(to)
                 }, 750)
             }
@@ -34,6 +39,7 @@ function Projects() {
             <Link
                 onClick={handleClick}
                 className='project'
+                style={{transform: scale ? 'scale(1.08)' : 'scale(1)', transitionDuration: '0.25s'}}
             >
                 {children}
             </Link>

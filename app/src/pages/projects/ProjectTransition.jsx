@@ -7,7 +7,6 @@ function ProjectTransition() {
 
     function handleProjectClick() {
         setTransitionStyle('translateX(0%)')
-        console.log('useOutletContext complete')
         setTimeout(() => {
             setTransitionStyle('translateX(100%)')
         }, 1000)
