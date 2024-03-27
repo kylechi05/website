@@ -45,13 +45,13 @@ function Navbar() {
     const handleScroll = () => {
         if (window.scrollY > 50) {
             setNavBackground({
-                color: 'rgba(255, 255, 255, 0.7)',
+                color: 'rgba(192, 207, 175, 0.75)',
                 blur: 'blur(8px)',
                 focus: 'rgba(86, 193, 114, 0.35)'
             })
         } else {
             setNavBackground({
-                color: 'rgba(255, 255, 255, 0)',
+                color: 'rgba(188, 235, 197, 0)',
                 blur: 'blur(0px)',
                 focus: 'rgba(86, 193, 114, 0)'
             })

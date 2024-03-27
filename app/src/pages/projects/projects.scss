@@ -10,7 +10,7 @@
     li {
         width: 100%;
         margin: clamp(1rem, 3vw, 3rem) 0px;
-        transition-duration: 0.35s;
+        transition-duration: 0.3s;
     }
 
     @include base.mdBreakpoint {
@@ -18,7 +18,7 @@
             transform: translateY(-15px);
         }
     }
-    
+
     .project {
         position: relative;
         display: flex;
