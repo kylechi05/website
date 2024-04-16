@@ -15,7 +15,7 @@ function Home() {
 
     return (
         <div ref={pageRef} className='h-screen'>
-            <Navbar />
+            <Navbar primary={true} />
             <Header content="Hi. I'm Kyle" />
            
         </div>

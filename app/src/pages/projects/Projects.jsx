@@ -42,7 +42,7 @@ function Projects() {
 
     return (
         <div ref={pageRef} className='flex flex-col'>
-            <Navbar />
+            <Navbar primary={true} />
             <Header content="Projects" />
             <ul className='project-container'>
                 <li>

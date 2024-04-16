@@ -15,7 +15,7 @@ function About() {
 
     return (
         <div ref={pageRef} className='about-me'>
-            <Navbar />
+            <Navbar primary={true} />
             <Header content="About Me" />
             <div className='content'>
                 <div className='biography text-font text-xl'>
