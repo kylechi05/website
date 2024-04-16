@@ -54,6 +54,14 @@ function Projects() {
                     </DelayedLink>
                 </li>
                 <li>
+                    <DelayedLink to='/projects/insider-sleuths'>
+                        <div className='header-font name'>
+                            Insider Sleuths
+                        </div>
+                        <img src='image_placeholderWeb.png' alt='InsiderSleuths.png' className='project-img' />
+                    </DelayedLink>
+                </li>
+                <li>
                     <DelayedLink to='/projects/beatmaker'>
                         <div className='header-font name'>
                             BeatMaker

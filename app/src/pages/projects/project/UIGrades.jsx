@@ -33,7 +33,6 @@ function UIGrades() {
                                     <li>- Bug Fixes</li>
                                 </ul>
                             </div>
-                            
                             <div>
                                 <p>Tech Stack</p>
                                 <ul className='ml-5'>

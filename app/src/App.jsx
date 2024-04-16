@@ -7,6 +7,7 @@ import Projects from './pages/projects/Projects.jsx'
 import UIGrades from './pages/projects/project/UIGrades.jsx'
 import BeatMaker from './pages/projects/project/BeatMaker.jsx'
 import Emotion from './pages/projects/project/Emotion.jsx'
+import InsiderSleuths from './pages/projects/project/InsiderSleuths.jsx'
 import PageNotFound from './pages/PageNotFound.jsx'
 import './index.scss'
 
@@ -23,6 +24,7 @@ function App() {
           <Route path='uigrades' element={<UIGrades />} />
           <Route path='beatmaker' element={<BeatMaker />} />
           <Route path='emotion' element={<Emotion />} />
+          <Route path='insider-sleuths' element={<InsiderSleuths />} />
         </Route>
         <Route path="*" element={<PageNotFound />} />
       </Routes>
