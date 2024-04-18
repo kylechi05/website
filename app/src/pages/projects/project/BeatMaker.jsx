@@ -14,7 +14,7 @@ function BeatMaker() {
     return (
         <div className='beatmaker' ref={pageRef}>
             <Navbar primary={false} />
-            <div className='pt-28 flex flex-col items-center'>
+            <div className='py-28 flex flex-col items-center'>
                 <h1 className='header-font'>Whole Lotta Beats</h1>
                 <img src='../BeatMakerBeatsWeb.png' className='w-3/4 rounded-xl md:rounded-3xl m-16' alt='beat maker image' />
                 <div className='flex flex-col items-center text-font px-8 md:px-24'>
@@ -24,7 +24,10 @@ function BeatMaker() {
                         This is where I was introduced to web development and version control.
                     </p>
                     <br />
-                    <p>See the project here: <a href='https://devpost.com/software/beatmaker-8cvu37' target='_blank' className='underline'>BeatMaker</a></p>
+                    <p>Project: <a href='https://devpost.com/software/beatmaker-8cvu37' target='_blank' className='underline'>Devpost</a></p>
+                    <p>Code: <a href='https://github.com/carlotran4/hackathonuiowa2023' target='_blank' className='underline'>GitHub</a></p>
+
+                    
                     <br />
                     <p>Tech Stack</p>
                     <ul className='ml-5'>

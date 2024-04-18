@@ -21,7 +21,8 @@ function UIGrades() {
                     <div className='text-font lg:pr-8 py-8'>
                         <p>UIGrades is a website that displays course grade distributions for the University of Iowa. I joined the project as an open source developer with the goal of learning React and Web Development.</p>
                         <br />
-                        <p>See the website here: <a className='underline' href='https://uigrades.vercel.app/' target='_blank'>UIGrades</a></p>
+                        <p>Website: <a className='underline' href='https://uigrades.vercel.app/' target='_blank'>UIGrades</a></p>
+                        <p>Code: <a className='underline' href='https://github.com/acm-uiowa/uigrades' target='_blank'>GitHub</a></p>
                         <br />
                         <div className='flex flex-col sm:flex-row sm:gap-32'>
                             <div>

@@ -24,12 +24,12 @@ function Navbar({ primary }) {
     const handleScroll = () => {
         if (window.scrollY > 50) {
             setNavBackground({
-                color: 'rgba(235, 235, 235, 0.75)',
-                blur: 'blur(8px)',
+                color: 'rgba(250, 240, 230, 0.75)',
+                blur: 'blur(10px)',
             })
         } else {
             setNavBackground({
-                color: 'rgba(188, 235, 197, 0)',
+                color: 'rgba(255, 245, 235, 0)',
                 blur: 'blur(0px)',
             })
         }
@@ -58,7 +58,7 @@ function Navbar({ primary }) {
 
                 { /* shows back arrow if page is not a main page*/
                     primary ? (
-                        <div className='pl-2 md:pl-8 flex w-full h-full justify-start items-center text-font text-2xl'>
+                        <div className='pl-2 md:pl-8 flex w-full h-full justify-start items-center text-font text-xl'>
                             Kyle Chi
                         </div>
                     ) : (
@@ -82,7 +82,7 @@ function Navbar({ primary }) {
                                     />
                                 </svg>
                             </div>
-                            <div className='flex w-full h-full justify-center items-center text-font text-2xl'>
+                            <div className='flex w-full h-full justify-center items-center text-font text-xl'>
                                 Kyle Chi
                             </div>
                         </>
@@ -100,11 +100,6 @@ function Navbar({ primary }) {
                         <li>
                             <Link to="/">
                                 Home
-                            </Link>
-                        </li>
-                        <li>
-                            <Link to="/about">
-                                    About
                             </Link>
                         </li>
                         <li>
@@ -143,9 +138,14 @@ function Navbar({ primary }) {
                 </div>
             </nav>
             <div
-                className='fixed right-0 top-20 flex flex-col h-[calc(100%-80px)] justify-start bg-white/50 backdrop-blur-sm'
+                className={`${
+                    primary
+                        ? 'sm:hidden'
+                        : 'lg:hidden'
+                    } fixed right-0 top-20 flex flex-col h-[calc(100%-80px)] justify-start backdrop-blur-[10px] text-font`}
                 style={{
                     width: 'clamp(15rem, 80vw, 25rem)',
+                    backgroundColor: 'rgba(250, 245, 245, 0.5)',
                     transform: menuClicked ? 'translateX(0%)' : 'translateX(100%)',
                     transitionDuration:'0.35s',
                 }}
@@ -155,15 +155,7 @@ function Navbar({ primary }) {
                 </Link>
                 <div className='menu-separator'>
                     <svg viewBox='0 0 1000 2'>
-                        <path stroke='gray' strokeWidth='3' d='m120,0 h760' />
-                    </svg>
-                </div>
-                <Link to='/about' className='menu-link'>
-                    About
-                </Link>
-                <div className='menu-separator'>
-                    <svg viewBox='0 0 1000 2'>
-                        <path stroke='gray' strokeWidth='3' d='m120,0 h760' />
+                        <path stroke='rgb(19, 78, 74)' strokeWidth='3' d='m120,0 h760' />
                     </svg>
                 </div>
                 <Link to='/projects' className='menu-link'>

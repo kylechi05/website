@@ -1,7 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from './pages/home/Home.jsx'
-import About from './pages/about/About.jsx'
 import ProjectTransition from './pages/projects/ProjectTransition.jsx'
 import Projects from './pages/projects/Projects.jsx'
 import UIGrades from './pages/projects/project/UIGrades.jsx'
@@ -18,7 +17,6 @@ function App() {
     <div className='gradient'>
       <Routes>
         <Route path="/" index element={<Home />} />
-        <Route path="/about" element={<About />} />
         <Route path="/projects" element={<ProjectTransition />}>
           <Route index element={<Projects />} />
           <Route path='uigrades' element={<UIGrades />} />

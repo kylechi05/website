@@ -14,10 +14,24 @@ function Home() {
     }, [])
 
     return (
-        <div ref={pageRef} className='h-screen'>
+        <div ref={pageRef} className='text-font'>
             <Navbar primary={true} />
-            <Header content="Hi. I'm Kyle" />
-           
+            <Header content="Home" />
+            <div className='flex flex-col md:flex-row p-24'>
+                <div className='md:w-3/4'>
+                    <img src='empty_pfp.png' alt='Image of me' />
+                </div>
+                <div className='md:pl-16'>
+                    <h1 className='text-6xl'>About Me</h1>
+                    <br />
+                    <p>Hi. I'm Kyle, a computer science student at The University of Iowa.</p>
+                    <p>
+                        Currently, I'm a student researcher at{' '}
+                        <a className='underline' href="https://uiowa.edu/" target='_blank'>UIowa</a>
+                        {' '}working on Deep Learning.
+                    </p>
+                </div>
+            </div>
         </div>
     )
 }
