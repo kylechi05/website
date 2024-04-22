@@ -13,7 +13,7 @@ const refreshToken = async () => {
     access_token = newAccessToken
 }
 
-// can't request song after getting an access token, need to make an initial call with useeffect maybe
+// can't request song before getting an access token, need to make an initial call with useeffect maybe
 const currentSong = async () => {
     const result = await fetch(`http://localhost:3000/api/currently-playing/${access_token}`)
     const currSong = await result.json()
