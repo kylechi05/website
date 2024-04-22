@@ -4,6 +4,22 @@ import Header from '../../components/Header'
 import Navbar from '../../components/navbar/Navbar.jsx'
 import './home.scss'
 
+let access_token
+
+const refreshToken = async () => {
+    const result = await fetch('http://localhost:3000/api/get-access-token')
+    const newToken = await result.json()
+    const newAccessToken = newToken.access_token
+    access_token = newAccessToken
+}
+
+// can't request song after getting an access token, need to make an initial call with useeffect maybe
+const currentSong = async () => {
+    const result = await fetch(`http://localhost:3000/api/currently-playing/${access_token}`)
+    const currSong = await result.json()
+    console.log(currSong)
+}
+
 function Home() {
 
     const pageRef = useRef(null)
@@ -31,6 +47,12 @@ function Home() {
                         {' '}working on Deep Learning.
                     </p>
                 </div>
+            </div>
+            <div onClick={currentSong}>
+                currentSong
+            </div>
+            <div onClick={refreshToken}>
+                refreshToken
             </div>
         </div>
     )
