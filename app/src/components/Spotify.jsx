@@ -5,7 +5,7 @@ let access_token
 function Spotify() {
 
     const [listeningStatus, setListeningStatus] = useState('')
-    const [songData, setSongData] = useState({ song: '', artists: '' })
+    const [data, setData] = useState({ name: '', artists: '' })
 
     useEffect(() => {
         refreshToken()
@@ -29,8 +29,9 @@ function Spotify() {
     const currentSong = async () => {
         const result = await fetch(`http://localhost:3000/api/currently-playing/${access_token}`)
         const currSongData = await result.json()
+
         let item
-        if (currSongData[0] === "currently-playing") {
+        if (currSongData[0] === "currently-playing") { // checks if data is currently playing
             item = currSongData[1].item
             setListeningStatus('currently-playing')
         } else {
@@ -38,32 +39,36 @@ function Spotify() {
             setListeningStatus('recently-played')
         }
 
-        const songName = item.name
-        const songArtists = item.artists.map(artist => artist.name)
+        const name = item.name // name of the track/episode
+        const artists = item.type == 'track'
+            ? item.artists.map(artist => artist.name).join(', ') // name of artists
+            : item.show.name // name of podcast
 
-        if (songName != songData.name) {
-            setSongData({
-                song: songName,
-                artists: songArtists.join(', ')
+        if (name != data.name) { // checks if the song/episode name is different from current name
+            setData({
+                name: name,
+                artists: artists
             })
         }
     }
 
     return (
         <div
-            className='flex flex-row rounded-full'
+            className='flex flex-row rounded-full items-center'
             style={{ backgroundColor: 'rgba(255, 255, 255, 0.45)'}}
         >
-            <div className='w-[45px] md:w-[60px] m-[22.5px] md:m-[30px]'>
-                <img src='Spotify_Icon_RGB_Black.png' alt='spotify black icon' />
-            </div>
-            <div className='flex flex-col justify-center'>
+            <img
+                src='Spotify_Icon_RGB_Black.png'
+                alt='spotify black icon'
+                className='w-[45px] h-[45px] md:w-[60px] md:h-[60px] m-[22.5px] md:m-[30px]'
+            />
+            <div className='flex flex-col justify-center py-[10px] mr-[22.5px] md:mr-[30px]'>
                 {listeningStatus == 'currently-playing'
                     ? <div className='font-bold'>Currently Listening To:</div>
                     : <div className='font-bold'>Recently Listened To: </div>
                 }
-                <div>{songData.song}</div>
-                <div className='opacity-75'>{songData.artists}</div>
+                <div>{data.name}</div>
+                <div className='opacity-75'>{data.artists}</div>
             </div>
         </div>
     )

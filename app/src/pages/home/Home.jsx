@@ -34,7 +34,6 @@ function Home() {
                 </div>
             </div>
             <Spotify />
-
         </div>
     )
 }

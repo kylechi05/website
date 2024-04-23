@@ -14,16 +14,17 @@ app.use(cors())
 
 app.get('/api/currently-playing/:accessToken', async (req, res) => {
   const accessToken = req.params.accessToken
-  const result = await fetch('https://api.spotify.com/v1/me/player/currently-playing', {
+  const result = await fetch('https://api.spotify.com/v1/me/player/currently-playing?additional_types=track%2Cepisode', {
         method: 'GET',
         headers: {
             Authorization: 'Bearer ' + accessToken
         }
   })
-  if (result.statusText == "OK") {
+
+  if (result.statusText == "OK") { // checks if something is currently playing
     const data = await result.json()
-    res.send(['currently-playing' ,data])
-  } else {
+    res.send(['currently-playing', data])
+  } else { // gets recently listened to song if nothing is playing
     const lastPlayedResult = await fetch('https://api.spotify.com/v1/me/player/recently-played?limit=1', {
       method: 'GET',
       headers: {
