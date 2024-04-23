@@ -15,13 +15,24 @@ app.use(cors())
 app.get('/api/currently-playing/:accessToken', async (req, res) => {
   const accessToken = req.params.accessToken
   const result = await fetch('https://api.spotify.com/v1/me/player/currently-playing', {
-        method: "GET",
+        method: 'GET',
         headers: {
-            Authorization: "Bearer " + accessToken
+            Authorization: 'Bearer ' + accessToken
         }
   })
-  const data = await result.json()
-  res.send(data)
+  if (result.statusText == "OK") {
+    const data = await result.json()
+    res.send(['currently-playing' ,data])
+  } else {
+    const lastPlayedResult = await fetch('https://api.spotify.com/v1/me/player/recently-played?limit=1', {
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + accessToken
+      }
+    })
+    const data = await lastPlayedResult.json()
+    res.send(['recently-played', data])
+  }
 })
 
 app.get('/api/get-access-token', async (req, res) => {
